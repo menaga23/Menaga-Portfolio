@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R.K. Menaga — UI/UX Designer & AR/VR Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#080E1C;
+  --navy2:#0D1526;
+  --violet:#7C5CFC;
+  --violet-light:#A88EFF;
+  --violet-dim:#2A1F5A;
+  --pearl:#F0EDF8;
+  --pearl2:#E2DCF5;
+  --slate:#8892A4;
+  --white:#FFFFFF;
+  --green:#1FE0A0;
+  --card-bg:#0F1829;
+  --border:#1E2D4A;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(8,14,28,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--violet-light);letter-spacing:0.05em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--slate);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.03em;transition:color 0.2s}
+.nav-links a:hover{color:var(--violet-light)}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.35}
+.hero-glow{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(124,92,252,0.18) 0%,transparent 70%);pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:800px}
+.hero-eyebrow{font-size:0.8rem;font-weight:600;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.6rem}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:30px;height:1px;background:var(--green);display:inline-block}
+.hero-name{font-family:'Syne',sans-serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;color:var(--white);margin-bottom:0.5rem}
+.hero-name span{color:var(--violet-light)}
+.hero-role{font-family:'Syne',sans-serif;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:400;color:var(--violet-light);margin-bottom:1.5rem;letter-spacing:0.02em}
+.hero-desc{font-size:1rem;color:var(--slate);line-height:1.8;max-width:560px;margin:0 auto 2.5rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--violet);color:var(--white);padding:0.75rem 2rem;border-radius:8px;border:none;font-size:0.9rem;font-weight:600;cursor:pointer;letter-spacing:0.03em;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:var(--violet-light);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--violet-light);padding:0.75rem 2rem;border-radius:8px;border:1.5px solid var(--violet);font-size:0.9rem;font-weight:600;cursor:pointer;letter-spacing:0.03em;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-outline:hover{background:var(--violet-dim);transform:translateY(-2px)}
+.hero-tags{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.tag{background:var(--violet-dim);color:var(--violet-light);font-size:0.78rem;padding:0.35rem 0.9rem;border-radius:100px;border:1px solid rgba(124,92,252,0.3);font-weight:500}
+
+section{padding:5rem 2rem}
+.section-inner{max-width:960px;margin:0 auto}
+.section-eyebrow{font-size:0.75rem;font-weight:600;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:0.75rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;color:var(--white);margin-bottom:3rem;line-height:1.2}
+.section-title span{color:var(--violet-light)}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.about-text p{color:var(--slate);line-height:1.9;font-size:0.95rem;margin-bottom:1rem}
+.about-text p strong{color:var(--white);font-weight:500}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet-light)}
+.stat-label{font-size:0.78rem;color:var(--slate);margin-top:0.25rem;line-height:1.4}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.skill-category{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.skill-cat-title{font-size:0.78rem;font-weight:600;color:var(--green);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem}
+.skill-tag{background:rgba(124,92,252,0.12);color:var(--pearl2);font-size:0.82rem;padding:0.3rem 0.75rem;border-radius:6px;border:1px solid rgba(124,92,252,0.2)}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.project-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:all 0.25s;position:relative;overflow:hidden}
+.project-card:hover{border-color:var(--violet);transform:translateY(-3px)}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--violet),var(--green));opacity:0;transition:opacity 0.25s}
+.project-card:hover::before{opacity:1}
+.project-badge{display:inline-block;background:rgba(31,224,160,0.12);color:var(--green);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:100px;border:1px solid rgba(31,224,160,0.25);font-weight:600;letter-spacing:0.08em;margin-bottom:1rem}
+.project-badge.ongoing{background:rgba(124,92,252,0.12);color:var(--violet-light);border-color:rgba(124,92,252,0.3)}
+.project-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;line-height:1.3}
+.project-desc{font-size:0.87rem;color:var(--slate);line-height:1.7;margin-bottom:1rem}
+.project-stack{display:flex;flex-wrap:wrap;gap:0.4rem}
+.stack-pill{background:var(--navy2);color:var(--slate);font-size:0.75rem;padding:0.2rem 0.6rem;border-radius:4px;border:1px solid var(--border)}
+
+.exp-timeline{position:relative;padding-left:2rem}
+.exp-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.exp-item{position:relative;margin-bottom:2.5rem}
+.exp-dot{position:absolute;left:-2.4rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:var(--violet);border:2px solid var(--navy);box-shadow:0 0 0 3px var(--violet-dim)}
+.exp-header{margin-bottom:0.5rem}
+.exp-role{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--white)}
+.exp-company{font-size:0.85rem;color:var(--violet-light);font-weight:500;margin-top:0.2rem}
+.exp-period{font-size:0.78rem;color:var(--slate);margin-top:0.2rem}
+.exp-bullets{list-style:none;margin-top:0.75rem}
+.exp-bullets li{font-size:0.88rem;color:var(--slate);line-height:1.7;padding-left:1rem;position:relative;margin-bottom:0.4rem}
+.exp-bullets li::before{content:'▸';position:absolute;left:0;color:var(--violet-light)}
+
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.cert-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.cert-org{font-size:0.72rem;font-weight:600;color:var(--violet-light);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
+.cert-name{font-size:0.88rem;color:var(--pearl);line-height:1.5;font-weight:500}
+
+.contact-section{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:3rem;text-align:center}
+.contact-title{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--white);margin-bottom:1rem}
+.contact-desc{color:var(--slate);font-size:0.95rem;line-height:1.8;max-width:480px;margin:0 auto 2rem}
+.contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.contact-chip{display:flex;align-items:center;gap:0.5rem;background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:0.65rem 1.25rem;color:var(--slate);font-size:0.85rem;text-decoration:none;transition:all 0.2s}
+.contact-chip:hover{border-color:var(--violet);color:var(--violet-light)}
+
+footer{text-align:center;padding:2rem;color:var(--slate);font-size:0.8rem;border-top:1px solid var(--border)}
+
+@media(max-width:640px){
+  .about-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hero-name{font-size:2.8rem}
+  .contact-section{padding:2rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">R.K. Menaga</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">AR/VR · UI/UX · Immersive Tech</div>
+    <h1 class="hero-name">R.K. <span>Menaga</span></h1>
+    <div class="hero-role">UI/UX Designer & AR/VR Developer</div>
+    <p class="hero-desc">Final-year Computer Science student at National Engineering College, building immersive and user-centered digital experiences through augmented reality, interaction design, and web technologies.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">Unity</span>
+      <span class="tag">Figma</span>
+      <span class="tag">AR Development</span>
+      <span class="tag">Java · Spring Boot</span>
+      <span class="tag">NLP</span>
+      <span class="tag">HTML / CSS</span>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-inner">
+    <div class="section-eyebrow">About me</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title" style="margin-bottom:1.25rem">Designing at the edge of <span>reality</span></h2>
+        <p>I'm a Computer Science Engineering student (2023–2027) passionate about the intersection of <strong>augmented reality, user experience design, and emerging technologies</strong>. I believe the best interfaces dissolve into the experience — whether that's a mobile screen or an AR overlay on the physical world.</p>
+        <p>Through internships at <strong>CodSoft</strong> in both UI/UX Design and Java development, I've built real products — from wireframes and interactive prototypes in Figma to backend applications in Java. Currently working on two ongoing research-driven projects in AR pipeline visualization and sign language translation.</p>
+        <p>I hold <strong>5 NPTEL certifications</strong> covering IoT, HCI, Computer Vision, and IIoT, and I'm actively applying for roles where I can contribute to immersive and user-centered product development.</p>
+      </div>
+      <div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">NPTEL Certifications</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">5</div>
+            <div class="stat-label">Projects Built</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-label">Internships at CodSoft</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">87%</div>
+            <div class="stat-label">HSC Academic Score</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem">
+          <div style="font-size:0.75rem;color:var(--green);font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem">Education</div>
+          <div style="font-size:0.92rem;font-weight:500;color:var(--white)">B.E. Computer Science Engineering</div>
+          <div style="font-size:0.82rem;color:var(--slate);margin-top:0.2rem">National Engineering College, Kovilpatti</div>
+          <div style="font-size:0.78rem;color:var(--violet-light);margin-top:0.2rem">2023 – 2027 (Final Year)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-eyebrow">Technical skills</div>
+    <h2 class="section-title">Tools & <span>Technologies</span></h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title">Design & Prototyping</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Canva</span>
+          <span class="skill-tag">Wireframing</span>
+          <span class="skill-tag">Prototyping</span>
+          <span class="skill-tag">User Research</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">AR / VR & 3D</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Unity</span>
+          <span class="skill-tag">AR Development</span>
+          <span class="skill-tag">Geospatial AR</span>
+          <span class="skill-tag">Multiset Tech</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">Responsive Design</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Backend & Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">Maven</span>
+          <span class="skill-tag">C / C++</span>
+          <span class="skill-tag">NLP</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Database & DevOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Oracle</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Jenkins</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Domains</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Human-Computer Interaction</span>
+          <span class="skill-tag">Computer Vision</span>
+          <span class="skill-tag">IoT / IIoT</span>
+          <span class="skill-tag">Deep Learning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-inner">
+    <div class="section-eyebrow">Selected work</div>
+    <h2 class="section-title">Projects & <span>Builds</span></h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="project-badge ongoing">Ongoing</span>
+        <div class="project-title">Geospatial AR Pipeline Visualization</div>
+        <p class="project-desc">AR-based underground pipeline mapping system that overlays real-world infrastructure data onto physical environments using multiset technology in Unity.</p>
+        <div class="project-stack">
+          <span class="stack-pill">Unity</span><span class="stack-pill">AR</span><span class="stack-pill">Geospatial</span><span class="stack-pill">Multiset Tech</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-badge ongoing">Ongoing</span>
+        <div class="project-title">Real-Time Speech to Sign Language Translation</div>
+        <p class="project-desc">Live NLP-powered system that converts spoken speech into sign language in real time, aimed at improving accessibility for the hearing-impaired.</p>
+        <div class="project-stack">
+          <span class="stack-pill">NLP</span><span class="stack-pill">Python</span><span class="stack-pill">Accessibility</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-badge">Completed</span>
+        <div class="project-title">Health Risk Calculator</div>
+        <p class="project-desc">Rule-based health prediction web application built with Java and Spring Boot. Allows users to input health parameters and receive risk assessments with actionable outputs.</p>
+        <div class="project-stack">
+          <span class="stack-pill">Java</span><span class="stack-pill">Spring Boot</span><span class="stack-pill">Maven</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-badge">Completed</span>
+        <div class="project-title">Travel Planning App</div>
+        <p class="project-desc">Research-driven UI/UX project featuring comprehensive wireframes and an interactive prototype in Figma for a mobile travel planning experience.</p>
+        <div class="project-stack">
+          <span class="stack-pill">Figma</span><span class="stack-pill">UI/UX</span><span class="stack-pill">Prototyping</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-badge">Completed</span>
+        <div class="project-title">Waste Reservation System</div>
+        <p class="project-desc">Responsive waste collection scheduling platform that lets users book pickup slots with a clean, accessible web interface.</p>
+        <div class="project-stack">
+          <span class="stack-pill">HTML</span><span class="stack-pill">CSS</span><span class="stack-pill">Responsive Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-eyebrow">Work history</div>
+    <h2 class="section-title">Internship <span>Experience</span></h2>
+    <div class="exp-timeline">
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-header">
+          <div class="exp-role">UI/UX Design Intern</div>
+          <div class="exp-company">CodSoft</div>
+          <div class="exp-period">Internship · Remote</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed wireframes, mockups, and interactive prototypes using Figma and Canva.</li>
+          <li>Applied user-centered design principles to enhance usability and accessibility across web and mobile interfaces.</li>
+          <li>Improved layout structure, visual hierarchy, and user flow based on feedback and usability testing.</li>
+          <li>Collaborated with team to iterate on design improvements from real user insights.</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-header">
+          <div class="exp-role">Java Development Intern</div>
+          <div class="exp-company">CodSoft</div>
+          <div class="exp-period">Internship · Remote</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed Java-based applications using object-oriented programming concepts and structured logic.</li>
+          <li>Implemented backend functionality through logical problem-solving techniques and algorithmic thinking.</li>
+          <li>Strengthened debugging skills and worked on mini-projects involving data handling and application logic.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-inner">
+    <div class="section-eyebrow">Learning & credentials</div>
+    <h2 class="section-title">Certifications & <span>Courses</span></h2>
+    <div style="margin-bottom:1.5rem;font-size:0.8rem;color:var(--slate);font-weight:600;text-transform:uppercase;letter-spacing:0.12em">NPTEL Certifications</div>
+    <div class="certs-grid" style="margin-bottom:2.5rem">
+      <div class="cert-card">
+        <div class="cert-org">NPTEL · IIT</div>
+        <div class="cert-name">Technical English for Engineers</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-org">NPTEL · IIT</div>
+        <div class="cert-name">Introduction to Internet of Things</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-org">NPTEL · IIT</div>
+        <div class="cert-name">Introduction to Industrial 4.0 & IIoT</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-org">NPTEL · IIT</div>
+        <div class="cert-name">Human Computer Interaction</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-org">NPTEL · IIT</div>
+        <div class="cert-name">Computer Vision & Deep Learning</div>
+      </div>
+    </div>
+    <div style="margin-bottom:1.5rem;font-size:0.8rem;color:var(--slate);font-weight:600;text-transform:uppercase;letter-spacing:0.12em">Online Courses</div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-org">LinkedIn Learning</div>
+        <div class="cert-name">User Experience for Web Design</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-org">Infosys Springboard</div>
+        <div class="cert-name">Database Management System (Part 1 & 2)</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-org">MongoDB University</div>
+        <div class="cert-name">MongoDB Basics for Students</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-org">Infosys Springboard</div>
+        <div class="cert-name">Programming Using Java</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-section">
+      <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.18em;color:var(--green);text-transform:uppercase;margin-bottom:1rem">Open to opportunities</div>
+      <div class="contact-title">Let's build something<br>that matters</div>
+      <p class="contact-desc">I'm actively looking for full-time roles and internship opportunities in UI/UX Design, AR/VR Development, and front-end engineering. Reach out — I'd love to talk.</p>
+      <div class="contact-links">
+        <a href="mailto:menagark2005@gmail.com" class="contact-chip"><span>✉</span> menagark2005@gmail.com</a>
+        <a href="tel:9363088842" class="contact-chip"><span>📞</span> +91 9363088842</a>
+        <a href="https://www.linkedin.com/in/menaga-rk-57365b289/" class="contact-chip" target="_blank"><span>🔗</span> LinkedIn Profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Built with care · R.K. Menaga · Computer Science Engineering, NEC Kovilpatti · 2025</footer>
+
+</body>
+</html>
+
